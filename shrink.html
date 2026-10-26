@@ -43,7 +43,7 @@ nav a:hover{background:var(--ink);color:var(--neon)}
 .band:first-child{margin-left:0}
 .band:hover,.band.on{opacity:1}
 .gridwrap{background:var(--green);padding:clamp(40px,5vw,72px) clamp(12px,2vw,28px) clamp(48px,6vw,88px)}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:clamp(12px,2vw,28px)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:clamp(12px,2vw,28px)}
 .grid.one{max-width:680px;margin:0 auto}
 .card{position:relative;display:block;aspect-ratio:3/4;overflow:hidden;background:#0a0a0a}
 .card .im{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .5s}
@@ -97,6 +97,8 @@ footer{background:var(--ink);color:#9a9a94;display:flex;justify-content:space-be
 .meta dd{margin:0}
 .ptext .pill{background:var(--pfg);color:var(--pbg)}
 .ptext .pill:hover{background:#fff;color:var(--ink)}
+.ptext h1.long{font-size:clamp(44px,5.2vw,80px);line-height:.95}
+.lead a,.body a{text-decoration:underline;text-underline-offset:3px}
 .ig{display:inline-flex;align-items:center;gap:10px}
 .ig svg{width:20px;height:20px}
 .viewer{position:sticky;top:92px;height:calc(100vh - 124px);min-height:520px;background:#e9e6e0;display:flex;flex-direction:column}
@@ -108,7 +110,8 @@ footer{background:var(--ink);color:#9a9a94;display:flex;justify-content:space-be
 .stage{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;padding:18px}
 .stage img,.stage video{max-width:100%;max-height:100%;object-fit:contain;display:block;box-shadow:0 8px 28px rgba(0,0,0,.18);background:transparent}
 .stage img{background:none}
-.thumbs{display:flex;gap:6px;padding:0 20px 14px;overflow-x:auto;justify-content:center}
+.thumbs{position:relative;display:flex;gap:6px;padding:0 20px 14px;overflow-x:auto;justify-content:flex-start}
+.thumbs button:first-child{margin-left:auto}.thumbs button:last-child{margin-right:auto}
 .thumbs button{position:relative;flex:0 0 auto;width:42px;height:56px;padding:0;border:2px solid transparent;background:none;cursor:pointer;opacity:.5}
 .thumbs button.on{border-color:var(--ink);opacity:1}
 .thumbs img{width:100%;height:100%;object-fit:cover;display:block}
@@ -147,7 +150,7 @@ footer{background:var(--ink);color:#9a9a94;display:flex;justify-content:space-be
   <section class="ptext" style="--pbg:#b9a6f2;--pfg:#0a0a0a">
     <a class="back mono" href="index.html#latest">← Latest</a><br>
     <span class="cat mono">Art</span>
-    <h1>SHRINK</h1>
+    <h1 class="">SHRINK</h1>
     <p class="lead">1995’te ortaya çıkan ve hâlâ sergilenmeye devam eden SHRINK, kişinin iki büyük şeffaf plastik yüzey arasında vakum etkisiyle sıkıştırılarak havada asılı kaldığı bir performans yerleştirmesi.</p>
     <p class="body">Performansçı, kendisine hava sağlayan ve plastik yüzeyler arasındaki havayı kontrol eden tüpler aracılığıyla nefesini ve hareketlerini düzenleyebiliyor.</p>
     <p class="body">İşin ilgi çekici tarafı, dışarıdan bakıldığında oldukça kısıtlayıcı görünen bir deneyimin, katılımcı açısından farklı bir bedensel ve duyusal deneyime dönüşmesi. Sanatçı, katılımcıları önceden hazırlıyor; böylece performans yalnızca fiziksel bir gösteri değil, aynı zamanda kişinin kendi korkuları ve kontrol algısıyla karşılaştığı bir süreç hâline geliyor.</p>
@@ -195,6 +198,7 @@ function show(i){
   if(e.play){e.currentTime=0;var pr=e.play();if(pr&&pr.catch)pr.catch(function(){})}
   cap.textContent="("+pad(cur+1)+"/"+pad(N)+")";kind.textContent=MEDIA[cur].t==="v"?"Video":"Photo";
   Array.prototype.forEach.call(th.children,function(b,k){b.classList.toggle("on",k===cur)});
+  var tb=th.children[cur];th.scrollLeft=tb.offsetLeft-th.clientWidth/2+tb.offsetWidth/2;
 }
 document.getElementById("prev").addEventListener("click",function(){show(cur-1)});
 document.getElementById("next").addEventListener("click",function(){show(cur+1)});
