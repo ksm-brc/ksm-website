@@ -1,0 +1,12 @@
+KSM CMS setup bundle
+
+Contains the original KSM pages plus a Decap CMS admin interface.
+
+GitHub repository: ksm-brc/ksm-website, branch main.
+Upload the CONTENTS of this extracted folder to the repository root (not the outer folder). Keep admin/ and content/ folder paths exactly as shown. Replace the existing index.html, gabriel-castano.html and shrink.html with the matching files from this bundle.
+
+After deployment, open https://kultursanatmuhabiri.com/admin/ . Netlify Identity must have an invited user before login. In Netlify > Identity > Users, invite your own email address; keep registration set to Invite only. Then accept the invitation from your email and log in at /admin/.
+
+CMS posts are stored in content/posts.json, shown first on the homepage, and open as article.html?slug=... . Existing SHRINK and Gabriel pages are retained.
+
+Do not share your GitHub API token or login details.

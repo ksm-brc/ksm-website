@@ -1,0 +1,37 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "uploads"
+public_folder: "/uploads"
+
+site_url: https://kultursanatmuhabiri.com
+display_url: https://kultursanatmuhabiri.com
+
+collections:
+  - name: "content"
+    label: "Website Content"
+    files:
+      - name: "posts"
+        label: "Posts"
+        file: "content/posts.json"
+        description: "Add and edit articles shown on the KSM homepage."
+        fields:
+          - label: "Posts"
+            name: "posts"
+            widget: "list"
+            summary: "{{fields.title}} — {{fields.category}}"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Slug (URL name, no spaces)", name: "slug", widget: "string", hint: "Example: new-exhibition-review" }
+              - label: "Category"
+                name: "category"
+                widget: "select"
+                options:
+                  - { label: "Art", value: "art" }
+                  - { label: "Design", value: "design" }
+                  - { label: "Photography", value: "photo" }
+                  - { label: "Pop Culture", value: "pop" }
+              - { label: "Cover image", name: "image", widget: "image", required: false }
+              - { label: "Short description", name: "excerpt", widget: "text", required: false }
+              - { label: "Article text", name: "body", widget: "markdown" }

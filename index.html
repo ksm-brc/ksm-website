@@ -181,6 +181,14 @@ var POSTS=[
  {name:"SHRINK",cat:"art",url:"shrink.html",img:SHRINK_IMG,hero:SHRINK_HERO,heroPos:"center 40%",internal:true},
  {name:"Gabriel Castaño",cat:"art",url:"gabriel-castano.html",img:GLOVES_IMG,hero:GLOVES_IMG,heroPos:"center 42%",internal:true}
 ];
+// CMS-managed posts are stored in content/posts.json and appended to the existing cards.
+var CMS_POSTS=[];
+fetch("/content/posts.json").then(function(r){if(!r.ok)throw new Error("No CMS posts yet");return r.json()}).then(function(data){
+  CMS_POSTS=(data.posts||[]).filter(function(p){return p.title&&p.slug}).map(function(p){return {name:p.title,title:p.title,cat:p.category||"art",url:"article.html?slug="+encodeURIComponent(p.slug),img:p.image||"",hero:p.image||"",heroPos:"center center",internal:true,excerpt:p.excerpt||""}});
+  POSTS=CMS_POSTS.concat(POSTS);
+  render(document.querySelector(".band.on")?.dataset.cat||"all");
+  if(CMS_POSTS.length){var latest=CMS_POSTS[0],hi=latest.hero||latest.img,hb=document.getElementById("hbg");if(hb&&hi){hb.style.backgroundImage="url('"+hi+"')";hb.style.backgroundPosition=latest.heroPos||"center 42%"}var cue=document.getElementById("cue");if(cue){cue.href=latest.url;cue.textContent="Now showing: "+latest.name+" ↗"}}
+}).catch(function(){});
 var CP=["polygon(0 4%,12% 0,100% 0,100% 88%,92% 100%,0 100%)","polygon(0 0,88% 0,100% 10%,100% 100%,8% 100%,0 92%)","polygon(4% 0,100% 6%,100% 100%,0 94%)","polygon(0 0,100% 0,96% 100%,6% 92%)","polygon(10% 0,100% 0,100% 90%,90% 100%,0 100%,0 10%)","polygon(0 8%,50% 0,100% 8%,100% 100%,0 100%)"];
 var SP=[5,4,3,4,3,5,3,5,4], AR=["4/5","1/1","3/4","4/5","1/1","4/5","3/4","1/1","4/5"];
 function ph(seed){

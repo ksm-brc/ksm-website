@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KSM — Article</title>
+<style>
+:root{--ink:#101010;--paper:#f5f5f0;--lime:#d6ff35;--orange:#ff4a0a}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:Arial,Helvetica,sans-serif}a{color:inherit}.top{padding:18px 4vw;background:var(--lime);border-bottom:4px solid var(--orange);display:flex;justify-content:space-between;align-items:center;font-size:12px;text-transform:uppercase;letter-spacing:.08em}.top a{text-decoration:none}.wrap{max-width:900px;margin:0 auto;padding:48px 5vw 100px}.back{font-size:12px;text-transform:uppercase;letter-spacing:.08em}.category{font-size:12px;text-transform:uppercase;letter-spacing:.12em;margin-top:44px}.title{font-size:clamp(42px,8vw,100px);line-height:.92;letter-spacing:-.06em;margin:16px 0 24px}.excerpt{font-size:clamp(18px,2.5vw,26px);max-width:680px;line-height:1.35}.cover{width:100%;max-height:650px;object-fit:cover;margin:34px 0}.body{font:20px/1.7 Georgia,serif;max-width:720px;white-space:pre-wrap}.body h1,.body h2,.body h3{font-family:Arial,sans-serif;line-height:1.1}.body a{overflow-wrap:anywhere}footer{border-top:1px solid #aaa;padding:24px 4vw;font-size:12px;text-transform:uppercase;letter-spacing:.08em}@media(max-width:600px){.wrap{padding-top:32px}.body{font-size:18px}}
+</style></head><body>
+<header class="top"><a href="/">KSM — Your pocket gallery</a><a href="https://www.instagram.com/kultursanatmuhabiri/" target="_blank" rel="noopener">Instagram ↗</a></header>
+<main class="wrap" id="article"><a class="back" href="/">← Back to homepage</a><p>Loading article…</p></main><footer>Kültür Sanat Muhabiri · <span id="year"></span></footer>
+<script>
+function esc(s){return String(s||'').replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function md(s){return esc(s).replace(/^### (.*)$/gm,'<h3>$1</h3>').replace(/^## (.*)$/gm,'<h2>$1</h2>').replace(/^# (.*)$/gm,'<h1>$1</h1>').replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\*(.*?)\*/g,'<em>$1</em>').replace(/\n\n/g,'</p><p>').replace(/\n/g,'<br>')}
+(async function(){document.getElementById('year').textContent=new Date().getFullYear();const slug=new URLSearchParams(location.search).get('slug');try{const r=await fetch('/content/posts.json');const data=await r.json();const p=(data.posts||[]).find(x=>x.slug===slug);if(!p)throw new Error('not found');document.title=p.title+' — KSM';document.getElementById('article').innerHTML='<a class="back" href="/">← Back to homepage</a><div class="category">'+esc(p.category)+'</div><h1 class="title">'+esc(p.title)+'</h1>'+(p.excerpt?'<p class="excerpt">'+esc(p.excerpt)+'</p>':'')+(p.image?'<img class="cover" src="'+esc(p.image)+'" alt="">':'')+'<div class="body"><p>'+md(p.body||'')+'</p></div>'}catch(e){document.getElementById('article').innerHTML='<a class="back" href="/">← Back to homepage</a><h1>Article not found</h1><p>This article may have been removed or is not published yet.</p>'}})();
+</script></body></html>
